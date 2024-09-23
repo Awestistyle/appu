@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taxi Company</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #0e1013;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 10px;
+        }
+        nav {
+            margin: 20px 0;
+        }
+        nav button {
+            margin: 0 10px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #0c130e;
+            color: white;
+            cursor: pointer;
+        }
+        .hero {
+            background-image: url('https://via.placeholder.com/1200x400?text=Taxi+Service');
+            background-size: cover;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin: 0;
+        }
+        .container {
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .services {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .service {
+            flex: 1;
+            margin: 10px;
+            padding: 20px;
+            background-color: #e7f1ff;
+            border-radius: 8px;
+            text-align: center;
+        }
+        footer {
+            margin-top: 20px;
+            padding: 10px 0;
+            background-color: #0a0e11;
+            color: white;
+            text-align: center;
+            border-radius: 10px;
+        }
+        .booking-form {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 50px;
+            box-sizing: border-box;
+        }
+        .booking-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Apple Taxi Services</h1>
+        <h2>Brandon</h2>
+    </header>
+
+    <nav>
+        <button onclick="location.reload()">Home</button>
+        <button onclick="document.getElementById('bookingModal').style.display='block'">Book a Ride</button>
+    </nav>
+
+    <div class="hero">
+        <h1>Your Reliable Taxi Service</h1>
+    </div>
+
+    <div>
+        <h2>Current Amount: <span id="amount">$3.80</span></h2>
+        <button id="startBtn">Start</button>
+        <button id="stopBtn">Stop</button>
+        <button id="resetBtn">Reset</button>
+    
+        <script src="scrip.js"></script></div>
+
+
+    <div class="container">
+        <h2>Our Services</h2>
+        <div class="services">
+            <div class="service">
+                <h3>Airport Transfers</h3>
+                <p>Convenient pickups and drop-offs to the airport.</p>
+            </div>
+            <div class="service">
+                <h3>City Tours</h3>
+                <p>Explore the city with our guided tours.</p>
+            </div>
+            <div class="service">
+                <h3>Long-Distance Rides</h3>
+                <p>Reliable long-distance transportation.</p>
+            </div>
+        </div>
+
+    </div>
+
+      
+    
+
+    <div id="bookingModal" class="booking-form">
+        <div class="booking-content">
+            <h2>Book a Ride</h2>
+            <label for="pickup">Pickup Location:</label><br>
+            <input type="text" id="pickup" placeholder="Enter pickup location"><br><br>
+            <label for="dropoff">Drop-off Location:</label><br>
+            <input type="text" id="dropoff" placeholder="Enter drop-off location"><br><br>
+            <button onclick="alert('Ride booked!')">Confirm Booking</button>
+            <button onclick="document.getElementById('bookingModal').style.display='none'">Close</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Apple Taxi Services. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let timer;
+        let timeElapsed = 180; // Starting from 3 minutes in seconds
+
+        function updateTimer() {
+            timeElapsed++;
+            const minutes = String(Math.floor(timeElapsed / 60)).padStart(2, '0');
+            const seconds = String(timeElapsed % 60).padStart(2, '0');
+            document.getElementById('tripTimer').textContent = `${minutes}:${seconds}`;
+        }
+
+        document.getElementById('startButton').onclick = function() {
+            timer = setInterval(updateTimer, 1000);
+            this.style.display = 'none';
+            document.getElementById('stopButton').style.display = 'block';
+        };
+
+        document.getElementById('stopButton').onclick = function() {
+            clearInterval(timer);
+            this.style.display = 'none';
+            document.getElementById('startButton').style.display = 'block';
+        };
+
+        let amount = 3.80; // Starting amount
+const increment = 0.10; // Increment value
+const displayElement = document.getElementById('amount');
+
+setInterval(() => {
+    amount += increment; // Increment the amount
+    displayElement.textContent = `$${amount.toFixed(2)}`; // Update the display
+}, 1000); // Run every 1000 milliseconds (1 second)
+
+    </script>
+
+</body>
+</html>
